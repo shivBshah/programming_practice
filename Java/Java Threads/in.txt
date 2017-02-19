@@ -1,0 +1,2 @@
+t 4
+f inA.txt inB.txt inC.txt inD.txt

@@ -1,0 +1,18 @@
+Thread[1]: count = 0
+Thread[2]: count = 0
+Thread[0]: count = 0
+Thread[1]: count = 1
+Thread[1]: count = 2
+Thread[0]: count = 1
+Thread[2]: count = 1
+Thread[1]: count = 3
+Thread[2]: count = 2
+Thread[2]: count = 3
+Thread[0]: count = 2
+Thread[0]: count = 3
+Thread[1]: count = 4
+Thread[2]: count = 4
+Thread[2]: DONE!
+Thread[0]: count = 4
+Thread[1]: DONE!
+Thread[0]: DONE!

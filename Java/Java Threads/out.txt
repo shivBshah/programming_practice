@@ -1,0 +1,8 @@
+Thread[0]: Line[0]: The quick brown fox
+Thread[0]: Line[1]: jumped over the lazy dog.
+Thread[1]: Line[0]: Do what you love,
+Thread[1]: Line[1]: love what you do,
+Thread[1]: Line[2]: and deliver more than you promise.
+Thread[2]: Line[0]: Six of one;
+Thread[2]: Line[1]: a dozen of the other.
+
