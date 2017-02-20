@@ -1,2 +1,0 @@
-Thread[2]: Line[0]: Six of one;
-Thread[2]: Line[1]: a dozen of the other.

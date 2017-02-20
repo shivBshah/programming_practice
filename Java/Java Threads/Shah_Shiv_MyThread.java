@@ -15,35 +15,35 @@ public class Shah_Shiv_MyThread extends Thread {
 		System.out.println("MyThread[" + getName() + "]: BEGIN!");
       BufferedReader in = null;
       BufferedWriter out = null; 
+      File f = null;
       try {
-         in = new BufferedReader(new FileReader(inFile));
-         out = new BufferedWriter(new FileWriter("t"+getName()+"_out.txt"));
+         f = new File(inFile);
+         in = new BufferedReader(new FileReader(f));
+         f = new File("t"+getName()+"_out.txt");
+         out = new BufferedWriter(new FileWriter(f));
          
          String line;
          int lineNum = 0;
          while ((line = in.readLine()) != null)
          {
-            out.write("Thread[" + getName()+ "]: Line["+ lineNum + "]: " + line);
+            out.write("Thread[" + getName()+ "]: Line["+ (lineNum+1) + "]: " + line);
             out.newLine();
             lineNum++;
          }
+         
+         try {
+            in.close();
+            out.close();
+         }
+         catch (IOException e) { e.printStackTrace(); }
       }
       catch (FileNotFoundException ex) {
          System.out.println("File " + inFile + " was not found.");
       }
       catch (IOException e) {
-         System.out.println("Error Opening File");
+         System.out.println("Error: Could not open " + f.getName() + ".");
       }
-      finally {
-        try {
-           if (in!=null)in.close();
-           if (out!=null)out.close();
-        }
-        catch (IOException e) {
-           e.printStackTrace();
-        }
-      }
-            
+                
 		System.out.println("MyThread[" + getName() + "]: END!");
 	}
 	 

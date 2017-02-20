@@ -17,9 +17,10 @@ public class Shah_Shiv_Driver {
             numThreads = scan.nextInt();
          
          String[] inFiles = new String[numThreads];
-         if (scan.next().toUpperCase().equals("F"))
+         if (scan.next().toUpperCase().equals("F")) //inFiles = scan.nextLine().split(" ");
             for (int i = 0; i < numThreads; ++i)
-               inFiles[i] = scan.next();
+               inFiles[i] = scan.next();  
+         scan.close();
          
          String[] outFiles = new String[numThreads];
          Thread[] threads = new Thread[numThreads];
@@ -40,10 +41,7 @@ public class Shah_Shiv_Driver {
       }
       catch (Exception e){
          System.out.println("ERROR: Could not open "+ file.getName());
-      }
-      finally {
-         if (scan != null) scan.close();
-      }
+      }      
       	
       System.out.println("Driver: END!");
    }
@@ -76,7 +74,6 @@ public class Shah_Shiv_Driver {
                writer.write(line);
                writer.newLine();
             }
-         
          }
          catch (FileNotFoundException ex) {
             System.out.println("ERROR: File " + readFiles[i] + " was not found.");

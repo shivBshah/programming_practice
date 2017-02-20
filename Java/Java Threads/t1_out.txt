@@ -1,3 +1,0 @@
-Thread[1]: Line[0]: Do what you love,
-Thread[1]: Line[1]: love what you do,
-Thread[1]: Line[2]: and deliver more than you promise.
