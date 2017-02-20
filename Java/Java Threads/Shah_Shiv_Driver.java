@@ -17,7 +17,7 @@ public class Shah_Shiv_Driver {
             numThreads = scan.nextInt();
          
          String[] inFiles = new String[numThreads];
-         if (scan.next().toUpperCase().equals("F")) //inFiles = scan.nextLine().split(" ");
+         if (scan.next().toUpperCase().equals("F"))
             for (int i = 0; i < numThreads; ++i)
                inFiles[i] = scan.next();  
          scan.close();
@@ -27,14 +27,14 @@ public class Shah_Shiv_Driver {
          for (int i = 0; i < numThreads; ++i)
          {
             String outFile = "t"+i+"_out.txt";
-            Thread t = new Shah_Shiv_MyThread(""+i, inFiles[i]);
+            Thread t = new Shah_Shiv_MyThread(""+i, inFiles[i], outFile);
             threads[i] = t;
             outFiles[i] = outFile;
             t.start();
          }
          
          await_execution(threads);
-         read_write(outFiles,"out.txt");           
+         merge(outFiles,"out.txt");           
       }
       catch (FileNotFoundException ex){
          System.out.println("ERROR: File " + file.getName() + " was not found.");
@@ -58,39 +58,60 @@ public class Shah_Shiv_Driver {
       }
    }
    
-   private static void read_write(String[] readFiles, String writeFile){
+   private static void merge(String[] inFiles, String mergedFile){
       
-      BufferedReader reader = null;
-      BufferedWriter writer = null;
-      
-      for (int i = 0; i < readFiles.length; ++i) 
+      BufferedReader[] readers = new BufferedReader[inFiles.length];
+      for (int i = 0; i < inFiles.length; ++i) 
       {
          try {
-            reader = new BufferedReader(new FileReader(readFiles[i]));
-            writer = new BufferedWriter(new FileWriter(writeFile, true));
-            
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-               writer.write(line);
-               writer.newLine();
-            }
+            BufferedReader bfr = new BufferedReader(new FileReader(inFiles[i]));
+            readers[i] = bfr;  
          }
-         catch (FileNotFoundException ex) {
-            System.out.println("ERROR: File " + readFiles[i] + " was not found.");
+         catch (FileNotFoundException ex){  
+            System.out.println("ERROR: File " + inFiles[i] + " was not found.");
          }
-         catch (IOException e) {
-            System.out.println("ERROR: Could not open " + writeFile);
+         catch (Exception ex){  
+            System.out.println("ERROR: Could not open " + inFiles[i] + ".");
          }
-         finally {
-            try {
-               if (reader!=null) reader.close(); 
-               if (writer!=null) writer.close();
-            }
-            catch (IOException e) {
-               e.printStackTrace();
-            } 
-         }  
       }
+      
+      StringBuilder sb = new StringBuilder();  
+      boolean stop = false;    
+      while (!stop) {    
+         int emptyFile = 0;
+         for (int i = 0; i < readers.length; ++i)
+         {
+            try {
+               String line = readers[i].readLine();
+               if (line == null) 
+               {
+                  emptyFile++;
+                  line = "";
+               }
+               else {
+                  sb.append(line);
+                  sb.append(System.getProperty("line.separator"));
+               }
+            }
+            catch (IOException ex) {
+               System.out.println("Error reading line.");
+            }
+         }
+         if (emptyFile == inFiles.length)
+            stop = true;
+      }
+      
+      try {
+         BufferedWriter writer = new BufferedWriter(new FileWriter(mergedFile));
+         writer.write(sb.toString());         
+         try {
+            writer.close();
+         } catch(IOException ie) { }
+      }
+      catch (IOException ex) {
+         System.out.println("ERROR: Could not open " + mergedFile + ".");
+      }
+
    }
     
 }

@@ -4,10 +4,12 @@ import java.util.*;
 public class Shah_Shiv_MyThread extends Thread {
   
    private String inFile;
+   private String outFile;
    
-	public Shah_Shiv_MyThread(String str, String inFile) {
+	public Shah_Shiv_MyThread(String str, String inFile, String outFile) {
 		super(str);
       this.inFile = inFile;
+      this.outFile = outFile;
 	}
 	 
 	public void run () 
@@ -19,7 +21,7 @@ public class Shah_Shiv_MyThread extends Thread {
       try {
          f = new File(inFile);
          in = new BufferedReader(new FileReader(f));
-         f = new File("t"+getName()+"_out.txt");
+         f = new File(outFile);
          out = new BufferedWriter(new FileWriter(f));
          
          String line;
@@ -38,10 +40,10 @@ public class Shah_Shiv_MyThread extends Thread {
          catch (IOException e) { e.printStackTrace(); }
       }
       catch (FileNotFoundException ex) {
-         System.out.println("File " + inFile + " was not found.");
+         System.out.println("ERROR: File " + inFile + " was not found.");
       }
       catch (IOException e) {
-         System.out.println("Error: Could not open " + f.getName() + ".");
+         System.out.println("ERROR: Could not open " + f.getName() + ".");
       }
                 
 		System.out.println("MyThread[" + getName() + "]: END!");
