@@ -79,13 +79,13 @@ public class Shah_Shiv_Driver {
    */
    private static void merge(String[] inFiles, String mergedFile){
       
-      BufferedReader[] readers = new BufferedReader[inFiles.length];
-      //first, create bufferReader for all files 
+      List<BufferedReader> readers = new ArrayList<BufferedReader>();
+      //create list of Readers for all files 
       for (int i = 0; i < inFiles.length; ++i)  
       {
          try {
             BufferedReader bfr = new BufferedReader(new FileReader(inFiles[i]));
-            readers[i] = bfr;  
+            readers.add(bfr);  
          }
          catch (FileNotFoundException ex){  
             System.out.println("ERROR: File " + inFiles[i] + " was not found.");
@@ -103,15 +103,12 @@ public class Shah_Shiv_Driver {
       //until there are no more lines in any file    
       while (!stop) {    
          int emptyFile = 0; //number of files whose all lines have been read
-         for (int i = 0; i < readers.length; ++i)
+         for (BufferedReader reader: readers)
          {
             try { //read one line from all files
-               String line = readers[i].readLine(); 
+               String line = reader.readLine(); 
                if (line == null) 
-               {
                   emptyFile++; 
-                  line = "";
-               }
                else {
                   sb.append(line);
                   sb.append(System.getProperty("line.separator"));
@@ -122,7 +119,7 @@ public class Shah_Shiv_Driver {
             }
          }
          //stop when all lines from all files have been read
-         if (emptyFile == inFiles.length) 
+         if (emptyFile == readers.size()) 
             stop = true;
       }
       
