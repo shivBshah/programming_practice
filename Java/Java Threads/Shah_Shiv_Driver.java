@@ -63,11 +63,13 @@ public class Shah_Shiv_Driver {
    private static void await_execution(Thread[] threads) {
       for (Thread t: threads)
       {
-         try {
-            t.join();
-         }
-         catch (InterruptedException ie) { 
-            ie.printStackTrace();
+         if (t.isAlive()) {
+            try {
+               t.join();
+            }
+            catch (InterruptedException ie) { 
+               ie.printStackTrace();
+            }
          }
       }
    }
@@ -129,12 +131,13 @@ public class Shah_Shiv_Driver {
          writer.write(sb.toString());         
          try {
             writer.close();
-         } catch(IOException ie) { }
+         } 
+         catch(IOException ie) { }
       }
       catch (IOException ex) {
          System.out.println("ERROR: Could not open " + mergedFile + ".");
       }
-
+   
    }
     
 }
