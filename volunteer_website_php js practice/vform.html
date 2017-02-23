@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" type="text/css" href="formstyle.css"/>
+        <script type ="text/javascript" src="formValidator.js"></script>
+    </head>
+    <body>
+        <h1> Volunteer Registration Form</h1> <br/><hr/>
+        <div class = "form">
+            <form name = "vform" action="action.php" method="post" onsubmit="return validateForm()">
+                <div id="row-fname"> 
+                    First Name <span class="required"></span> <br/>
+                    <input type="text" name="firstname" placeholder="First" required/>
+                </div>
+                <div id="row-lname">
+                    Last Name<br/>
+                    <input type="text" name="lastname" placeholder="Last" required/>
+                </div>
+                <div id="row-email">
+                    
+                    Email<br/>
+                    <input type="email" name="email" required/><br/>
+                </div>
+                <div id="row-phone">
+                    Phone Number <br/>
+                    <input type="tel" name='phone' required/><br/><br/>
+                </div>
+                <input type="submit" value="Submit" name='submit'/><br/>
+                
+             </form>    
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,55 @@
+*{
+    padding:0;
+    margin:0;
+}
+
+html {
+  background-color:gray;
+}
+
+
+body{
+    width:70%;
+    height:200%;
+    margin-left:auto;
+    margin-right:auto;
+    padding:2%;
+    font-family: 'Trebuchet MS';
+    background-color:white;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse:collapse;
+     background-color:#F9F9F9;
+}
+
+th,td{
+    padding: 12px 8px;
+    text-align:left;
+    color:#353535;
+}
+
+tr:nth-child(odd){
+    background-color:#E5FAFB;
+}
+
+th{
+    background-color:#0B9396;
+    color:white;
+}
+
+button{
+    padding:8px 25px;
+    font-weight:bold;
+    float:right;
+    font-size: 110%;
+}
+
+@media print{
+   button {
+     display: none;
+  }   
+
+}
